@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:base="en">
-	<title>Eleventy Base Blog v8</title>
-	<subtitle>I am writing about my experiences as a naval navel-gazer.</subtitle>
-	<link href="https://example.com/feed/feed.xml" rel="self"/>
-	<link href="https://example.com/"/>
+	<title>UniversalAlt</title>
+	<subtitle>UniversalALt project</subtitle>
+	<link href="https://universalalt.github.io/feed/feed.xml" rel="self"/>
+	<link href="https://universalalt.github.io/universal-alt/"/>
 	<updated>2024-09-19T00:00:00Z</updated>
-	<id>https://example.com/</id>
+	<id>https://universalalt.github.io/universal-alt/</id>
 	<author>
-		<name>Your Name Here</name>
-		<email>youremailaddress@example.com</email>
+		<name>Len Dierickx</name>
+		<email>len.dierickx@sitefig.eu</email>
 	</author>
 	
 	<entry>
 		<title>Kick-off.</title>
-		<link href="https://example.com/blog/firstpost/"/>
+		<link href="https://universalalt.github.io/blog/firstpost/"/>
 		<updated>2024-09-19T00:00:00Z</updated>
-		<id>https://example.com/blog/firstpost/</id>
-		<content type="html">&lt;h2 id=&quot;todo&quot; tabindex=&quot;-1&quot;&gt;ToDo &lt;a class=&quot;header-anchor&quot; href=&quot;https://example.com/blog/firstpost/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+		<id>https://universalalt.github.io/blog/firstpost/</id>
+		<content type="html">&lt;h2 id=&quot;todo&quot; tabindex=&quot;-1&quot;&gt;ToDo &lt;a class=&quot;header-anchor&quot; href=&quot;https://universalalt.github.io/blog/firstpost/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 </content>
 	</entry>
 </feed>

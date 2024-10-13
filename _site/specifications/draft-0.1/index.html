@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Accessible Content Description System (ACDS), including new IPTC meta fields for ALT descriptions.</title>
+		<meta name="description" content="Draft specifications">
+		<link rel="alternate" href="/universal-alt/feed/feed.xml" type="application/atom+xml" title="UniversalAlt">
+		<link rel="alternate" href="/universal-alt/feed/feed.json" type="application/json" title="UniversalAlt">
+		
+		<style>/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #8292a2;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}
+* { box-sizing: border-box; }
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	list-style: none;
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	list-style: none;
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from -1;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+/* Direct Links / Markdown Headers */
+.header-anchor {
+	text-decoration: none;
+	font-style: normal;
+	font-size: 1em;
+	margin-left: .1em;
+}
+a[href].header-anchor,
+a[href].header-anchor:visited {
+	color: transparent;
+}
+a[href].header-anchor:focus,
+a[href].header-anchor:hover {
+	text-decoration: underline;
+}
+a[href].header-anchor:focus,
+:hover > a[href].header-anchor {
+	color: #aaa;
+}
+
+h2 + .header-anchor {
+	font-size: 1.5em;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/universal-alt/" class="home-link">UniversalAlt</a>
+			<nav>
+				<h2 class="visually-hidden">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/universal-alt/">Home</a></li>
+					<li class="nav-item"><a href="/universal-alt/blog/">Archive</a></li>
+					<li class="nav-item"><a href="/universal-alt/about/">About us</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			
+<h1>Accessible Content Description System (ACDS), including new IPTC meta fields for ALT descriptions.</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2024-10-13">13 October 2024</time></li>
+	<li><a href="/universal-alt/tags/accessibility/" class="post-tag">accessibility</a></li>
+</ul>
+
+<h1 id="accessible-content-description-system-acds-including-new-iptc-meta-fields-for-alt-descriptions" tabindex="-1">Accessible Content Description System (ACDS), including new IPTC meta fields for ALT descriptions. <a class="header-anchor" href="#accessible-content-description-system-acds-including-new-iptc-meta-fields-for-alt-descriptions">#</a></h1>
+<h2 id="acds-specification" tabindex="-1">ACDS Specification <a class="header-anchor" href="#acds-specification">#</a></h2>
+<h3 id="1-protocol" tabindex="-1">1. Protocol <a class="header-anchor" href="#1-protocol">#</a></h3>
+<p>The ACDS protocol is designed for efficient distribution of ALT descriptions across the internet.</p>
+<h4 id="1-1-transport-layer" tabindex="-1">1.1 Transport Layer <a class="header-anchor" href="#1-1-transport-layer">#</a></h4>
+<ul>
+<li>Primary: UDP for quick lookups</li>
+<li>Secondary: TCP for larger transfers</li>
+</ul>
+<h4 id="1-2-message-types" tabindex="-1">1.2 Message Types <a class="header-anchor" href="#1-2-message-types">#</a></h4>
+<ol>
+<li>Query: Request ALT descriptions</li>
+<li>Response: Contain ALT descriptions</li>
+<li>Update: Add or modify descriptions</li>
+<li>Synchronization: Keep distributed servers up-to-date</li>
+</ol>
+<h4 id="1-3-message-format" tabindex="-1">1.3 Message Format <a class="header-anchor" href="#1-3-message-format">#</a></h4>
+<pre><code>Header:
+  - Message ID (16 bits)
+  - Flags (16 bits)
+  - Question Count (16 bits)
+  - Answer Count (16 bits)
+  - Authority Count (16 bits)
+  - Additional Count (16 bits)
+
+Question Section:
+  - URL (variable length)
+  - Type (16 bits)
+  - Class (16 bits)
+
+Answer Section:
+  - URL (variable length)
+  - Type (16 bits)
+  - Class (16 bits)
+  - TTL (32 bits)
+  - Data Length (16 bits)
+  - ALT Description (variable length)
+</code></pre>
+<h3 id="2-server-architecture" tabindex="-1">2. Server Architecture <a class="header-anchor" href="#2-server-architecture">#</a></h3>
+<h4 id="2-1-server-types" tabindex="-1">2.1 Server Types <a class="header-anchor" href="#2-1-server-types">#</a></h4>
+<ol>
+<li>Root ACDS Servers</li>
+<li>Top-Level Domain (TLD) ACDS Servers</li>
+<li>Authoritative ACDS Servers</li>
+<li>Recursive ACDS Servers</li>
+</ol>
+<h4 id="2-2-server-distribution" tabindex="-1">2.2 Server Distribution <a class="header-anchor" href="#2-2-server-distribution">#</a></h4>
+<ul>
+<li>Minimum of 13 root servers, geographically distributed</li>
+<li>TLD servers for each top-level domain</li>
+<li>Authoritative servers managed by domain owners or service providers</li>
+</ul>
+<h3 id="3-acds-records" tabindex="-1">3. ACDS Records <a class="header-anchor" href="#3-acds-records">#</a></h3>
+<h4 id="3-1-record-types" tabindex="-1">3.1 Record Types <a class="header-anchor" href="#3-1-record-types">#</a></h4>
+<ol>
+<li>A (ALT): Contains the primary ALT description</li>
+<li>AA (Additional ALT): Contains additional or language-specific ALT descriptions</li>
+<li>M (Metadata): Contains metadata about the image or media</li>
+</ol>
+<h4 id="3-2-record-format" tabindex="-1">3.2 Record Format <a class="header-anchor" href="#3-2-record-format">#</a></h4>
+<pre><code>Record:
+  - URL (variable length)
+  - Type (8 bits)
+  - Class (16 bits)
+  - TTL (32 bits)
+  - Data Length (16 bits)
+  - Data (variable length)
+</code></pre>
+<h3 id="4-acds-resolvers" tabindex="-1">4. ACDS Resolvers <a class="header-anchor" href="#4-acds-resolvers">#</a></h3>
+<h4 id="4-1-integration-points" tabindex="-1">4.1 Integration Points <a class="header-anchor" href="#4-1-integration-points">#</a></h4>
+<ul>
+<li>Web browsers</li>
+<li>Content Management Systems (CMSes)</li>
+<li>Screen readers</li>
+<li>Search engine crawlers</li>
+</ul>
+<h4 id="4-2-resolver-functions" tabindex="-1">4.2 Resolver Functions <a class="header-anchor" href="#4-2-resolver-functions">#</a></h4>
+<ul>
+<li>Query ACDS servers</li>
+<li>Cache responses</li>
+<li>Update local cache</li>
+<li>Handle timeouts and errors</li>
+</ul>
+<h3 id="5-security" tabindex="-1">5. Security <a class="header-anchor" href="#5-security">#</a></h3>
+<h4 id="5-1-authentication" tabindex="-1">5.1 Authentication <a class="header-anchor" href="#5-1-authentication">#</a></h4>
+<ul>
+<li>TSIG (Transaction Signature) for server-to-server communication</li>
+<li>DNSSEC-like system for origin authentication and data integrity</li>
+</ul>
+<h4 id="5-2-encryption" tabindex="-1">5.2 Encryption <a class="header-anchor" href="#5-2-encryption">#</a></h4>
+<ul>
+<li>TLS for all TCP connections</li>
+<li>DTLS for UDP connections where supported</li>
+</ul>
+<h3 id="6-iptc-meta-fields-for-alt-descriptions" tabindex="-1">6. IPTC Meta Fields for ALT Descriptions <a class="header-anchor" href="#6-iptc-meta-fields-for-alt-descriptions">#</a></h3>
+<p>To support the ACDS, we propose the following new IPTC meta fields:</p>
+<h4 id="6-1-acds-fields" tabindex="-1">6.1 ACDS Fields <a class="header-anchor" href="#6-1-acds-fields">#</a></h4>
+<ol>
+<li>
+<p>ACDS:ALTDescription</p>
+<ul>
+<li>Type: String</li>
+<li>Description: Primary ALT description for the image</li>
+</ul>
+</li>
+<li>
+<p>ACDS:AdditionalALT</p>
+<ul>
+<li>Type: Array of Strings</li>
+<li>Description: Additional ALT descriptions, including language-specific versions</li>
+</ul>
+</li>
+<li>
+<p>ACDS:ALTLanguage</p>
+<ul>
+<li>Type: String</li>
+<li>Description: Language code for the primary ALT description (e.g., &quot;en-US&quot;)</li>
+</ul>
+</li>
+<li>
+<p>ACDS:ALTCreator</p>
+<ul>
+<li>Type: String</li>
+<li>Description: Entity responsible for creating the ALT description</li>
+</ul>
+</li>
+<li>
+<p>ACDS:ALTCreationDate</p>
+<ul>
+<li>Type: Date</li>
+<li>Description: Date when the ALT description was created or last updated</li>
+</ul>
+</li>
+<li>
+<p>ACDS:ALTVersion</p>
+<ul>
+<li>Type: Integer</li>
+<li>Description: Version number of the ALT description</li>
+</ul>
+</li>
+<li>
+<p>ACDS:ContentType</p>
+<ul>
+<li>Type: String</li>
+<li>Description: Type of content (e.g., &quot;image&quot;, &quot;video&quot;, &quot;audio&quot;)</li>
+</ul>
+</li>
+<li>
+<p>ACDS:ContentContext</p>
+<ul>
+<li>Type: String</li>
+<li>Description: Context in which the content appears (e.g., &quot;article&quot;, &quot;product&quot;, &quot;advertisement&quot;)</li>
+</ul>
+</li>
+</ol>
+<h4 id="6-2-example-usage" tabindex="-1">6.2 Example Usage <a class="header-anchor" href="#6-2-example-usage">#</a></h4>
+<pre class="language-xml" tabindex="0"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">iptc:</span><span class="token namespace">ACDS:</span>ALTDescription</span><span class="token punctuation">></span></span>A golden retriever puppy sitting in a field of daisies<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">iptc:</span><span class="token namespace">ACDS:</span>ALTDescription</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">iptc:</span><span class="token namespace">ACDS:</span>AdditionalALT</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">rdf:</span>Bag</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">rdf:</span>li</span> <span class="token attr-name"><span class="token namespace">xml:</span>lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>es<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Un cachorro de golden retriever sentado en un campo de margaritas<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">rdf:</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">rdf:</span>li</span> <span class="token attr-name"><span class="token namespace">xml:</span>lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fr<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Un chiot golden retriever assis dans un champ de marguerites<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">rdf:</span>li</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">rdf:</span>Bag</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">iptc:</span><span class="token namespace">ACDS:</span>AdditionalALT</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">iptc:</span><span class="token namespace">ACDS:</span>ALTLanguage</span><span class="token punctuation">></span></span>en-US<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">iptc:</span><span class="token namespace">ACDS:</span>ALTLanguage</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">iptc:</span><span class="token namespace">ACDS:</span>ALTCreator</span><span class="token punctuation">></span></span>ACDS AI Generator<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">iptc:</span><span class="token namespace">ACDS:</span>ALTCreator</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">iptc:</span><span class="token namespace">ACDS:</span>ALTCreationDate</span><span class="token punctuation">></span></span>2024-10-13<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">iptc:</span><span class="token namespace">ACDS:</span>ALTCreationDate</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">iptc:</span><span class="token namespace">ACDS:</span>ALTVersion</span><span class="token punctuation">></span></span>1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">iptc:</span><span class="token namespace">ACDS:</span>ALTVersion</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">iptc:</span><span class="token namespace">ACDS:</span>ContentType</span><span class="token punctuation">></span></span>image<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">iptc:</span><span class="token namespace">ACDS:</span>ContentType</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">iptc:</span><span class="token namespace">ACDS:</span>ContentContext</span><span class="token punctuation">></span></span>article<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">iptc:</span><span class="token namespace">ACDS:</span>ContentContext</span><span class="token punctuation">></span></span></code></pre>
+<p>This specification outlines the core components of the ACDS, including the protocol, server architecture, record types, and new IPTC meta fields for ALT descriptions. It provides a framework for implementing a distributed system for managing and delivering accessible content descriptions across the internet.</p>
+
+
+		</main>
+
+		<footer></footer>
+
+		<!-- This page `/universal-alt/specifications/draft-0.1/` was built on 2024-10-13T17:28:28.951Z -->
+	</body>
+</html>
